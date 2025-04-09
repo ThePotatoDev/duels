@@ -1,4 +1,8 @@
 package gg.tater.core.gui
 
-class Button {
+import gg.tater.core.Item
+import org.bukkit.entity.Player
+
+data class Button(val item: Item, var onClick: ((Player) -> Unit)? = null) {
+
 }
