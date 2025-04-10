@@ -9,11 +9,20 @@ import org.bukkit.event.Event
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.inventory.InventoryCloseEvent
 import org.bukkit.event.inventory.InventoryOpenEvent
+import org.bukkit.plugin.Plugin
 import org.bukkit.plugin.java.JavaPlugin
 
 abstract class ServerPlugin : JavaPlugin(), CoroutineScope by CoroutineScope(Dispatchers.Default) {
 
+    companion object {
+        // This should not be referenced for anything unless necessary for Bukkit
+        // targeted implementations
+        var INSTANCE: Plugin? = null
+    }
+
     override fun onEnable() {
+        INSTANCE = this
+
         super.onEnable()
 
         listen<InventoryOpenEvent>(this) {

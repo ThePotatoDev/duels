@@ -13,3 +13,5 @@ findProject(":servers:duel")?.name = "duel"
 include("plugins")
 include("plugins:core")
 findProject(":plugins:core")?.name = "core"
+include("servers:proxy")
+findProject(":servers:proxy")?.name = "proxy"

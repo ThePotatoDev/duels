@@ -2,7 +2,6 @@ package gg.tater.players
 
 import gg.tater.core.DatabaseFactory
 import gg.tater.core.api.player.Player
-import gg.tater.players.model.Players
 import io.github.cdimascio.dotenv.Dotenv
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
@@ -33,12 +32,10 @@ class PlayersServiceApplication {
                 env.get("SQL_PASSWORD")
             ).init()
 
-            Players.createTable()
-
             routing {
                 post("/players") {
                     val player = call.receive<Player>()
-                    Players.save(player)
+                    //TODO: DB save
                     call.respondText("Player saved: ${player.name}", status = HttpStatusCode.Created)
                 }
 
@@ -57,13 +54,14 @@ class PlayersServiceApplication {
                         return@get
                     }
 
-                    val player = Players.get(uuid)
-
-                    if (player == null) {
-                        call.respond(HttpStatusCode.NotFound, "Player not found")
-                    } else {
-                        call.respond(player)
-                    }
+                    //TODO: DB get
+//                    val player = Players.get(uuid)
+//
+//                    if (player == null) {
+//                        call.respond(HttpStatusCode.NotFound, "Player not found")
+//                    } else {
+//                        call.respond(player)
+//                    }
                 }
             }
         }.start(wait = true)
